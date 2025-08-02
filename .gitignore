@@ -1,1 +1,2 @@
-models/eeg_models/voting_model.pkl
+__pycache__/
+*.py
