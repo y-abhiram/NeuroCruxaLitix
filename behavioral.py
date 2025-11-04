@@ -16,12 +16,25 @@ from tensorflow.keras.models import load_model
 import mediapipe as mp
 
 # === Load Models ===
+
+# Get the absolute path to the current directory (your app root)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODELS_DIR = os.path.join(BASE_DIR, "models")
+
+# Load models safely from relative paths
+cnn_model = load_model(os.path.join(MODELS_DIR, "cnn_feature_extractor.h5"))
+rf_model = joblib.load(os.path.join(MODELS_DIR, "cnn_rf_model.pkl"))
+scaler = joblib.load(os.path.join(MODELS_DIR, "cnn_rf_scaler.pkl"))
+label_encoder = joblib.load(os.path.join(MODELS_DIR, "cnn_rf_label_encoder.pkl"))
+emotion_model = load_model(os.path.join(MODELS_DIR, "emotion_model.h5"))
+
+'''
 cnn_model = load_model("/models/cnn_feature_extractor.h5")
 rf_model = joblib.load("/models/cnn_rf_model.pkl")
 scaler = joblib.load("/models/cnn_rf_scaler.pkl")
 label_encoder = joblib.load("/models/cnn_rf_label_encoder.pkl")
 emotion_model = load_model('/models/emotion_model.h5')
-
+'''
 emotion_labels = ['Angry', 'Disgust', 'Fear', 'Happy', 'Neutral', 'Sad', 'Surprise']
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 
